@@ -40,7 +40,6 @@ double eps = 1e-12;
 
 inline int mod(int a, int m) { return ((a % m) + m) % m; }
 
-
 int main()
 {
     ios_base::sync_with_stdio(false);
@@ -49,34 +48,30 @@ int main()
 
     int n;
     cin >> n;
-    vi coins(n);
+    vll num_list(n);
     forn(i, n)
-        cin >> coins[i];
+        cin >> num_list[i];
 
-    vb mem(100001, false);
-    mem[0] = 1;
+    // The memory contains the score that you can get in any range of the list
+    vvll mem(n + 1);
+    forn(i, n) {
+        mem[i] = vll(n - i + 1);
+        mem[i][n - i - 1] = num_list[i];
+    }
+    mem[n] = {0};
 
-    vi money_sums = {0};
-    int num_sums = 0;
-    for (int coin : coins)
+    rforn(i, n - 2)
     {
-        int current_sums = money_sums.size();
-        for (int i = 0; i < current_sums; i++)
+        rforn(j, n - i - 2)
         {
-            if (!mem[money_sums[i] + coin])
-            {
-                mem[money_sums[i] + coin] = true;
-                money_sums.pb(money_sums[i] + coin);
-                num_sums++;
-            }
+            if (mem[i + 1][j] >= mem[i][j + 1])
+                mem[i][j] = num_list[n - j - 1] + min(mem[i + 1][j + 1], mem[i][j + 2]);
+            else
+                mem[i][j] = num_list[i] + min(mem[i + 1][j + 1], mem[i + 2][j]);
         }
     }
 
-    sort(money_sums.begin(), money_sums.end());
-    cout << num_sums << endl;
-    forsn(i, 1, num_sums)
-        cout << money_sums[i] << ' ';
-    cout << money_sums[num_sums] << endl;
+    cout << mem[0][0] << endl;
 
     return 0;
 }
