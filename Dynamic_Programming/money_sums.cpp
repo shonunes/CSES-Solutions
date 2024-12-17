@@ -40,38 +40,43 @@ double eps = 1e-12;
 
 inline int mod(int a, int m) { return ((a % m) + m) % m; }
 
-int edit_distance(string s1, string s2, int n, int m)
-{
-    vvi mem(n + 1, vi(m + 1, 0));
-    forsn(i, 1, n + 1)
-        mem[i][0] = i;
-    forsn(j, 1, m + 1)
-        mem[0][j] = j;
-
-    forn(i, n)
-    {
-        forn(j, m)
-        {
-            if (s1[i] != s2[j])
-                mem[i + 1][j + 1] = min(mem[i][j], min(mem[i + 1][j], mem[i][j + 1])) + 1;
-            else
-                mem[i + 1][j + 1] = mem[i][j];
-        }
-    }
-
-    return mem[n][m];
-}
 
 int main()
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
+    // ios_base::sync_with_stdio(false);
+    // cin.tie(NULL);
+    // cout.tie(NULL);
 
-    string s1, s2;
-    cin >> s1 >> s2;
+    int n;
+    cin >> n;
+    vi coins(n);
+    forn(i, n)
+        cin >> coins[i];
 
-    cout << edit_distance(s1, s2, s1.size(), s2.size()) << endl;
+    vb mem(100001, false);
+    mem[0] = 1;
+
+    vi money_sums = {0};
+    int num_sums = 0;
+    for (int coin : coins)
+    {
+        int current_sums = money_sums.size();
+        for (int i = 0; i < current_sums; i++)
+        {
+            if (!mem[money_sums[i] + coin])
+            {
+                mem[money_sums[i] + coin] = true;
+                money_sums.pb(money_sums[i] + coin);
+                num_sums++;
+            }
+        }
+    }
+
+    sort(money_sums.begin(), money_sums.end());
+    cout << num_sums << endl;
+    forsn(i, 1, num_sums)
+        cout << money_sums[i] << ' ';
+    cout << money_sums[num_sums] << endl;
 
     return 0;
 }
