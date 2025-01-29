@@ -67,8 +67,8 @@ int main()
         v[i] = {arrival, leaving};        
     }
 
+    // Save the number of customers that arrived until the arrival times
     sort(v.begin(), v.end(), sortArrival);
-
     map<int,int> customers;
     customers[v[0].first] = 1;
     forsn(i, 1, n)
@@ -76,10 +76,9 @@ int main()
         customers[v[i].first] = customers[v[i - 1].first] + 1;
     }
 
+    // Subtract the previous times with the customers that already left
     sort(v.begin(), v.end(), sortLeaving);
-
     int exited = 0, vpos = 0;
-    
     for (auto it = customers.begin(); it != customers.end(); it++)
     {
         while (v[vpos].second < it->first)
@@ -87,10 +86,11 @@ int main()
             exited++;
             vpos++;
         }
-
         it->second -= exited;
     }
 
+    // Find the maximum number of customers
+    // This can be done in the previous step
     int ans = 0;
     for(auto time : customers)
     {
