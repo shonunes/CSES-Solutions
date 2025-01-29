@@ -44,19 +44,19 @@ inline int mod(int a, int m) { return ((a % m) + m) % m; }
 int main() {
     ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
 
-    int n_applicants, n_apartments, k;
-    cin >> n_applicants >> n_apartments >> k;
+    int nApplicants, nApartments, k;
+    cin >> nApplicants >> nApartments >> k;
     
-    vi desires(n_applicants), sizes(n_apartments);
-    forn(i, n_applicants)
+    vi desires(nApplicants), sizes(nApartments);
+    forn(i, nApplicants)
         cin >> desires[i];
-    forn(i, n_apartments)
+    forn(i, nApartments)
         cin >> sizes[i];
     sort(desires.begin(), desires.end());
     sort(sizes.begin(), sizes.end());
 
     int applicant = 0, apartment = 0, ans = 0;
-    while (applicant != n_applicants && apartment != n_apartments)
+    while (applicant != nApplicants && apartment != nApartments)
     {
         if (sizes[apartment] < desires[applicant] - k)
             apartment++;

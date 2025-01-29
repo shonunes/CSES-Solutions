@@ -9,7 +9,7 @@ int main(void)
     string s;
     cin >> s;
 
-    i64 odd = 0, odd_index = -1;
+    i64 odd = 0, oddIndex = -1;
     vector<i64> freq(26);
 
     for (char c : s) {
@@ -24,7 +24,7 @@ int main(void)
                 cout << "NO SOLUTION\n";
                 return 0;
             }
-            odd_index = i;
+            oddIndex = i;
         }
     }
 
@@ -39,8 +39,8 @@ int main(void)
     }
     if (odd)
     {
-        while (freq[odd_index]--) {
-            ans.push_back(odd_index + 'A');
+        while (freq[oddIndex]--) {
+            ans.push_back(oddIndex + 'A');
         }
     }
     

@@ -46,28 +46,28 @@ void solve() {
     cin >> n >> x;
 
     vector<int> coins(n);
-    int lower_coin = INF;
+    int lowerCoin = INF;
     forn(i, n) {
         cin >> coins[i];
-        if (coins[i] < lower_coin)
-            lower_coin = coins[i];
+        if (coins[i] < lowerCoin)
+            lowerCoin = coins[i];
     }
 
-    vector<int> min_coins(x + 1, INF);
-    min_coins[0] = 0;
-    forn(i, x + 1 - lower_coin) {
+    vector<int> minCoins(x + 1, INF);
+    minCoins[0] = 0;
+    forn(i, x + 1 - lowerCoin) {
         forn(c, n) {
             int pos = i + coins[c];
             if (pos > x)
                 continue;
-            min_coins[pos] = min(min_coins[pos], min_coins[i] + 1);
+            minCoins[pos] = min(minCoins[pos], minCoins[i] + 1);
         }
     }
 
-    if (min_coins[x] == INF)
+    if (minCoins[x] == INF)
         cout << "-1\n";
     else
-        cout << min_coins[x] << endl;
+        cout << minCoins[x] << endl;
 }
 
 int main() {

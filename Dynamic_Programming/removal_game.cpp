@@ -48,15 +48,15 @@ int main()
 
     int n;
     cin >> n;
-    vll num_list(n);
+    vll numList(n);
     forn(i, n)
-        cin >> num_list[i];
+        cin >> numList[i];
 
     // The memory contains the score that you can get in any range of the list
     vvll mem(n + 1);
     forn(i, n) {
         mem[i] = vll(n - i + 1);
-        mem[i][n - i - 1] = num_list[i];
+        mem[i][n - i - 1] = numList[i];
     }
     mem[n] = {0};
 
@@ -65,9 +65,9 @@ int main()
         rforn(j, n - i - 2)
         {
             if (mem[i + 1][j] >= mem[i][j + 1])
-                mem[i][j] = num_list[n - j - 1] + min(mem[i + 1][j + 1], mem[i][j + 2]);
+                mem[i][j] = numList[n - j - 1] + min(mem[i + 1][j + 1], mem[i][j + 2]);
             else
-                mem[i][j] = num_list[i] + min(mem[i + 1][j + 1], mem[i + 2][j]);
+                mem[i][j] = numList[i] + min(mem[i + 1][j + 1], mem[i + 2][j]);
         }
     }
 

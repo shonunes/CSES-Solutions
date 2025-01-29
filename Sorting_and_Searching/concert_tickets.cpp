@@ -57,16 +57,16 @@ int main() {
 
     forn(i, m)
     {
-        int customer_limit;
-        cin >> customer_limit;
+        int customerLimit;
+        cin >> customerLimit;
 
-        if (tickets.empty() || *tickets.begin() > customer_limit)
+        if (tickets.empty() || *tickets.begin() > customerLimit)
         {
             cout << -1 << endl;
             continue;
         }
 
-        auto it = tickets.upper_bound(customer_limit);
+        auto it = tickets.upper_bound(customerLimit);
         it--;
         cout << *it << endl;
         tickets.erase(it);

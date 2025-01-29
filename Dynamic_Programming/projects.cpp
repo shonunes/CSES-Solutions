@@ -59,7 +59,7 @@ int main()
     }
     sort(projects.begin(), projects.end());
 
-    ll max_reward = 0;
+    ll maxReward = 0;
     map<int,ll> mem;
     mem[0] = 0;
     for (auto project : projects)
@@ -69,11 +69,11 @@ int main()
 
         auto it = mem.lower_bound(start);
         it--;
-        max_reward = max(max_reward, it->se + reward);
-        mem[end] = max_reward;
+        maxReward = max(maxReward, it->se + reward);
+        mem[end] = maxReward;
     }
 
-    cout << max_reward << endl;
+    cout << maxReward << endl;
 
     return 0;
 }

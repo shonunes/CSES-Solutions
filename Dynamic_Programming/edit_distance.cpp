@@ -40,7 +40,7 @@ double eps = 1e-12;
 
 inline int mod(int a, int m) { return ((a % m) + m) % m; }
 
-int edit_distance(string s1, string s2, int n, int m)
+int editDistance(string s1, string s2, int n, int m)
 {
     vvi mem(n + 1, vi(m + 1, 0));
     forsn(i, 1, n + 1)
@@ -71,7 +71,7 @@ int main()
     string s1, s2;
     cin >> s1 >> s2;
 
-    cout << edit_distance(s1, s2, s1.size(), s2.size()) << endl;
+    cout << editDistance(s1, s2, s1.size(), s2.size()) << endl;
 
     return 0;
 }

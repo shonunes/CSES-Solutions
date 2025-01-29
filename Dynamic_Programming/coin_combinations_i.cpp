@@ -46,16 +46,16 @@ void solve() {
     cin >> n >> x;
 
     vector<int> coins(n);
-    int lower_coin = INF;
+    int lowerCoin = INF;
     forn(i, n) {
         cin >> coins[i];
-        if (coins[i] < lower_coin)
-            lower_coin = coins[i];
+        if (coins[i] < lowerCoin)
+            lowerCoin = coins[i];
     }
 
     vector<int> possibilities(x + 1, 0);
     possibilities[0] = 1;
-    forn(i, x + 1 - lower_coin) {
+    forn(i, x + 1 - lowerCoin) {
         forn(c, n) {
             int pos = i + coins[c];
             if (pos > x)
