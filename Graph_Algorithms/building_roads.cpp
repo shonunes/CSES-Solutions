@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void dfs(int city, vector<vector<int>> &adj, vector<int> &connected, vector<int> &visited)
+void dfs(int city, vector<vector<int>> &adj, vector<int> &connected, vector<bool> &visited)
 {
     visited[city] = true;
     connected.push_back(city);
@@ -17,7 +17,7 @@ int main(void)
     int cities, roads;
     cin >> cities >> roads;
 
-    vector<int> visited(cities, false);
+    vector<bool> visited(cities, false);
     vector<vector<int>> connected;
     vector<vector<int>> adj(cities);
 
