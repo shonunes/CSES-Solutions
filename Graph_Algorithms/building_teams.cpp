@@ -52,7 +52,7 @@ int main(void)
         cout << "IMPOSSIBLE\n";
         return 0;
     }
-    
+
     for (int i = 0; i < pupils; i++)
     {
         cout << team[i] << ' ';

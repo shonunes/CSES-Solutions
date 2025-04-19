@@ -118,7 +118,7 @@ int main(void)
     {
         moves move = mov[cell.first][cell.second];
         stack.push(move);
-        move = (moves) ((move + 2) % 4);
+        move = (moves)((move + 2) % 4);
         cell = {cell.first + di[move], cell.second + dj[move]};
     }
 

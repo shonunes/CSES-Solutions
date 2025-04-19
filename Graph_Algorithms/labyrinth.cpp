@@ -16,11 +16,11 @@ vector<vector<bool>> graph;
 vector<pair<char, int>> path;
 bool found = false;
 
-void BFS(pair<int,int> root, pair<int,int> goal)
+void BFS(pair<int, int> root, pair<int, int> goal)
 {
     int m = graph.size(), n = graph[0].size(), i = 0;
-    pair<int,int> cur;
-    queue<pair<pair<int,int>, int>> Q;
+    pair<int, int> cur;
+    queue<pair<pair<int, int>, int>> Q;
     visited[root.first][root.second] = true;
     Q.push({root, -1});
 
@@ -31,14 +31,14 @@ void BFS(pair<int,int> root, pair<int,int> goal)
         pos = Q.front().second;
         Q.pop();
 
-
         int x = cur.first, y = cur.second;
         if (x != 0 && graph[x - 1][y] && visited[x - 1][y] == false)
         {
             visited[x - 1][y] = true;
             Q.push({{x - 1, y}, i});
             path.pb({'U', pos});
-            if (make_pair(x - 1, y) == goal) {
+            if (make_pair(x - 1, y) == goal)
+            {
                 found = true;
                 return;
             }
@@ -49,7 +49,8 @@ void BFS(pair<int,int> root, pair<int,int> goal)
             visited[x][y - 1] = true;
             Q.push({{x, y - 1}, i});
             path.pb({'L', pos});
-            if (make_pair(x, y - 1) == goal) {
+            if (make_pair(x, y - 1) == goal)
+            {
                 found = true;
                 return;
             }
@@ -60,7 +61,8 @@ void BFS(pair<int,int> root, pair<int,int> goal)
             visited[x + 1][y] = true;
             Q.push({{x + 1, y}, i});
             path.pb({'D', pos});
-            if (make_pair(x + 1, y) == goal) {
+            if (make_pair(x + 1, y) == goal)
+            {
                 found = true;
                 return;
             }
@@ -71,7 +73,8 @@ void BFS(pair<int,int> root, pair<int,int> goal)
             visited[x][y + 1] = true;
             Q.push({{x, y + 1}, i});
             path.pb({'R', pos});
-            if (make_pair(x, y + 1) == goal) {
+            if (make_pair(x, y + 1) == goal)
+            {
                 found = true;
                 return;
             }
@@ -98,7 +101,8 @@ int main(void)
                 graph[i][j] = true;
             else if (c == 'A')
                 start = {i, j};
-            else if (c == 'B') {
+            else if (c == 'B')
+            {
                 end = {i, j};
                 graph[i][j] = true;
             }
@@ -106,14 +110,16 @@ int main(void)
     }
 
     BFS(start, end);
-    if (!found) {
+    if (!found)
+    {
         cout << "NO\n";
         return 0;
     }
 
     int cur = path.size() - 1;
     string ans;
-    while (cur >= 0) {
+    while (cur >= 0)
+    {
         char dir = path[cur].first;
         int next = path[cur].second;
         ans += dir;
@@ -121,7 +127,9 @@ int main(void)
     }
     reverse(ans.begin(), ans.end());
 
-    cout << "YES\n" << ans.size() << endl << ans << endl;
+    cout << "YES\n"
+         << ans.size() << endl
+         << ans << endl;
 
     return 0;
 }

@@ -8,7 +8,7 @@ int dfs(int cur, int parent, vector<int> &parents, vector<vector<int>> &adj)
     {
         if (city == parent)
             continue;
-        
+
         if (parents[city] != -1)
         {
             parents[city] = cur;

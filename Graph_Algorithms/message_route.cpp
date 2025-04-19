@@ -19,16 +19,16 @@ int bfs(int target, vector<vector<int>> &adj, vector<int> &visited)
         pair<int, int> top = q.front();
         q.pop();
         int computer = top.first;
-        
+
         for (int neighbor : adj[computer])
         {
             if (visited[neighbor] != -1)
                 continue;
-            
+
             visited[neighbor] = computer;
             if (neighbor == target)
                 return top.second + 1;
-            
+
             q.push({neighbor, top.second + 1});
         }
     }
