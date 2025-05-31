@@ -82,7 +82,7 @@ int main()
         cin >> a >> b;
         a--;
         b--;
-        int x = nums[a],  y = nums[b];
+        int x = nums[a], y = nums[b];
 
         if (x != 0 && a < pos[x - 1] && b >= pos[x - 1])
         {
