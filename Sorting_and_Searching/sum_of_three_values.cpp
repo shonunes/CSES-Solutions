@@ -46,24 +46,40 @@ int main()
     cin.tie(NULL);
     cout.tie(NULL);
 
-    int n;
-    cin >> n;
+    int n, k;
+    cin >> n >> k;
 
-    vector<pair<int, int>> tasks(n);
+    vpii vals(n);
     forn(i, n)
     {
-        cin >> tasks[i].first >> tasks[i].second;
+        cin >> vals[i].first;
+        vals[i].second = i + 1;
     }
-    sort(tasks.begin(), tasks.end());
 
-    ll ans = 0, t = 0;
-    for (pii task : tasks)
+    sort(vals.begin(), vals.end());
+
+    forn(i, n - 2)
     {
-        t += task.first;
-        ans += task.second - t;
-    }
+        int target = k - vals[i].first;
+        if (target <= 1)
+            break;
 
-    cout << ans << endl;
+        int x = i + 1, y = n - 1;
+        while (x < y)
+        {
+            int sum = vals[x].first + vals[y].first;
+            if (sum == target)
+            {
+                cout << vals[i].second << " " << vals[x].second << " " << vals[y].second << endl;
+                return 0;
+            }
+            else if (sum < target)
+                x++;
+            else
+                y--;
+        }
+    }
+    cout << "IMPOSSIBLE\n";
 
     return 0;
 }
