@@ -40,70 +40,29 @@ const int dj[] = {0, -1, 0, 1};
 
 inline int mod(int a, int m) { return ((a % m) + m) % m; }
 
-void solve(vi &input, int &k, int &n)
-{
-    int n1 = n / 2, n2 = n - n1;
-    vi v1(n1), v2(n2);
-    forn(i, n)
-    {
-        if (i < n1)
-            v1[i] = input[i];
-        else
-            v2[i - n1] = input[i];
-    }
-
-    unordered_map<int, ll> firstSums;
-    firstSums.reserve(1 << n1);
-    forn(i, 1 << n1)
-    {
-        ll sum = 0;
-        forn(j, n1)
-        {
-            if (i & (1 << j))
-                sum += v1[j];
-
-            if (sum > k)
-                break;
-        }
-
-        if (sum <= k)
-            firstSums[sum]++;
-    }
-
-    ll ans = 0;
-    forn(i, 1 << n2)
-    {
-        ll sum = 0;
-        forn(j, n2)
-        {
-            if (i & (1 << j))
-                sum += v2[j];
-
-            if (sum > k)
-                break;
-        }
-        if (sum <= k)
-            ans += firstSums[k - sum];
-    }
-
-    cout << ans << endl;
-}
-
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
 
-    int n, k;
-    cin >> n >> k;
-    vi v(n);
+    int n, target;
+    cin >> n >> target;
+
+    map<ll, int> m;
+    m[0] = 1;
+    ll sum = 0;
+    ll ans = 0;
     forn(i, n)
     {
-        cin >> v[i];
+        int num;
+        cin >> num;
+        sum += num;
+        ans += m[sum - target];
+        m[sum]++;
     }
 
-    solve(v, k, n);
+    cout << ans << endl;
 
     return 0;
 }
