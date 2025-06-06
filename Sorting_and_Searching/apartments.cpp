@@ -40,18 +40,22 @@ const int dj[] = {0, -1, 0, 1};
 
 inline int mod(int a, int m) { return ((a % m) + m) % m; }
 
-
-int main() {
-    ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
 
     int nApplicants, nApartments, k;
     cin >> nApplicants >> nApartments >> k;
-    
+
     vi desires(nApplicants), sizes(nApartments);
     forn(i, nApplicants)
-        cin >> desires[i];
+            cin >>
+        desires[i];
     forn(i, nApartments)
-        cin >> sizes[i];
+            cin >>
+        sizes[i];
     sort(desires.begin(), desires.end());
     sort(sizes.begin(), sizes.end());
 

@@ -61,12 +61,14 @@ int main()
     cin >> n >> k;
 
     auto ost = oset();
-    forsn(i, 1, n + 1) {
+    forsn(i, 1, n + 1)
+    {
         ost.insert(i);
     }
 
     int index = 0;
-    rforsn(i, n, 1) {
+    rforsn(i, n, 1)
+    {
         index = mod(index + k, i);
         auto it = ost.find_by_order(index);
         cout << *it << ' ';

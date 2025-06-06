@@ -51,7 +51,7 @@ int main()
         cin >> value;
 
         maxValue = max(maxValue, value);
-        cur = max((ll) 0, cur + value);
+        cur = max((ll)0, cur + value);
         maxSum = max(maxSum, cur);
     }
 

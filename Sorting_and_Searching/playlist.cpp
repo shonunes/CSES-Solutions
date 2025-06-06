@@ -44,9 +44,9 @@ int main()
     int n;
     cin >> n;
 
-    map<int,int> lastSongIndex;
+    map<int, int> lastSongIndex;
     int sequenceStart = 1, longestSequence = 0;
-    for(int i = 1; i <= n; i++)
+    for (int i = 1; i <= n; i++)
     {
         int songId;
         cin >> songId;

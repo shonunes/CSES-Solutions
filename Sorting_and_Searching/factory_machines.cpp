@@ -70,7 +70,7 @@ int main()
         machineMin = min(machineMin, machines[i]);
     }
 
-    ll start = 0, end = (ll) t * machineMin;
+    ll start = 0, end = (ll)t * machineMin;
     while (start < end)
     {
         ll mid = start + (end - start) / 2;

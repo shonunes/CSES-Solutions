@@ -40,9 +40,11 @@ const int dj[] = {0, -1, 0, 1};
 
 inline int mod(int a, int m) { return ((a % m) + m) % m; }
 
-
-int main() {
-    ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
 
     int n, m;
     cin >> n >> m;
@@ -71,6 +73,6 @@ int main() {
         cout << *it << endl;
         tickets.erase(it);
     }
-    
+
     return 0;
 }

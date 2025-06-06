@@ -79,7 +79,7 @@ int main()
 
         if (j == n)
         {
-            ans += (ll) (j - i) * (j - i + 1) / 2;
+            ans += (ll)(j - i) * (j - i + 1) / 2;
             break;
         }
         ans += j - i;

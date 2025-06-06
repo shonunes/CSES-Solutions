@@ -51,7 +51,7 @@ int main()
         cin >> val;
         values[i] = {val, i + 1};
     }
-    
+
     sort(values.begin(), values.end());
 
     int start = 0, end = n - 1;

@@ -2,7 +2,6 @@
 
 using namespace std;
 
-
 int main(void)
 {
     ios_base::sync_with_stdio(false);
@@ -20,7 +19,7 @@ int main(void)
         cin >> cube;
 
         auto it = towerTops.upper_bound(cube);
-        
+
         if (it == towerTops.end())
         {
             towerTops.insert(cube);

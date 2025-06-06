@@ -46,14 +46,15 @@ int main()
 
     vi stickLengths(numSticks);
     forn(i, numSticks)
-        cin >> stickLengths[i];
+            cin >>
+        stickLengths[i];
 
     sort(stickLengths.begin(), stickLengths.end());
 
     // The solution will be the sum of the differences to the median
     int median = stickLengths[numSticks / 2];
     ll minCost = 0;
-    for(int length : stickLengths)
+    for (int length : stickLengths)
         minCost += abs(median - length);
 
     cout << minCost << endl;

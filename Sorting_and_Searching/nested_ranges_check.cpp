@@ -40,7 +40,8 @@ const int dj[] = {0, -1, 0, 1};
 
 inline int mod(int a, int m) { return ((a % m) + m) % m; }
 
-struct range {
+struct range
+{
     int x, y, pos;
 };
 
@@ -80,7 +81,7 @@ int main()
         else
             minY = r.y;
     }
-    for(int c : contains)
+    for (int c : contains)
         cout << c << ' ';
     cout << endl;
 
@@ -95,10 +96,9 @@ int main()
         else
             maxY = r.y;
     }
-    for(int c : contained)
+    for (int c : contained)
         cout << c << ' ';
     cout << endl;
-    
 
     return 0;
 }

@@ -64,7 +64,7 @@ int main()
             cout << "0 ";
         else
             cout << s.top().second << ' ';
-        
+
         s.push({num, i + 1});
     }
     cout << endl;

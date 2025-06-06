@@ -55,9 +55,9 @@ int main()
     }
 
     sort(movieTimes.begin(), movieTimes.end());
-    
+
     int lastEndingTime = 0, moviesWatched = 0;
-    for(auto movieTime : movieTimes)
+    for (auto movieTime : movieTimes)
     {
         if (movieTime.second >= lastEndingTime)
         {
@@ -67,7 +67,6 @@ int main()
     }
 
     cout << moviesWatched << endl;
-
 
     return 0;
 }

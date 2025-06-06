@@ -19,7 +19,7 @@ int main(void)
         auto it = numbers.upper_bound(last);
         if (it == numbers.end())
             it = numbers.begin();
-        
+
         it = next(it);
         if (it == numbers.end())
             it = numbers.begin();
