@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+
 using namespace std;
 
 typedef long long ll;
@@ -26,11 +27,6 @@ const int dj[] = {0, -1, 0, 1};
 #define rforn(i, s) for (ll i = s; i >= 0; i--)
 #define rforsn(i, s, e) for (ll i = s; i >= e; i--)
 #define endl '\n'
-#define mp make_pair
-#define pb push_back
-#define pf push_front
-#define fi first
-#define se second
 #define INF 2e9
 #define all(x) (x).begin(), (x).end()
 #define sz(x) ((ll)(x).size())
@@ -40,54 +36,51 @@ const int dj[] = {0, -1, 0, 1};
 
 inline int mod(int a, int m) { return ((a % m) + m) % m; }
 
-struct info
-{
-    int sum, x, y;
-
-    info(int sum, int x, int y) : sum(sum), x(x), y(y) {}
-};
-
 int main()
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
 
-    int n, target;
-    cin >> n >> target;
+    int n, k;
+    cin >> n >> k;
 
-    vi values(n);
+    vpii times(n);
     forn(i, n)
     {
-        cin >> values[i];
+        cin >> times[i].first >> times[i].second;
+    }
+    sort(times.begin(), times.end());
+
+    int ans = k;
+    multiset<int> watching;
+    forn(i, k)
+    {
+        watching.insert(times[i].second);
     }
 
-    map<int, pii> m;
-    forsn(i, 2, n)
+    forsn(i, k, n)
     {
-        int prev = values[i - 1];
-        forn(j, i - 1)
+        int start = times[i].first, end = times[i].second;
+        auto first = watching.begin();
+        if (*first <= start)
         {
-            m[values[j] + prev] = {j + 1, i};
+            watching.erase(first);
+            watching.emplace(end);
+            ans++;
         }
-
-        forsn(j, i + 1, n)
+        else
         {
-            int sum = values[i] + values[j];
-
-            if (sum <= target)
+            auto greater = watching.upper_bound(end);
+            if (greater != watching.end())
             {
-                auto it = m.find(target - sum);
-                if (it != m.end())
-                {
-                    cout << it->second.first << ' ' << it->second.second << ' ' << i + 1 << ' ' << j + 1 << endl;
-                    return 0;
-                }
+                watching.erase(--watching.end());
+                watching.emplace(end);
             }
         }
     }
 
-    cout << "IMPOSSIBLE\n";
+    cout << ans << endl;
 
     return 0;
 }
