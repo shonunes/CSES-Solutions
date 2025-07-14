@@ -49,11 +49,11 @@ ll __query_tree(ll node, ll node_start, ll node_end, ll query_start, ll query_en
         return seg_tree[node];
 
     if (node_start > query_end || node_end < query_start)
-        return 0;
+        return INF;
 
     ll mid = (node_start + node_end) / 2;
-    return __query_tree(2 * node, node_start, mid, query_start, query_end) +
-           __query_tree(2 * node + 1, mid + 1, node_end, query_start, query_end);
+    return min(__query_tree(2 * node, node_start, mid, query_start, query_end),
+               __query_tree(2 * node + 1, mid + 1, node_end, query_start, query_end));
 }
 
 void __update_tree(ll node, ll node_start, ll node_end, ll target, ll val)
@@ -70,7 +70,7 @@ void __update_tree(ll node, ll node_start, ll node_end, ll target, ll val)
     else
         __update_tree(2 * node + 1, mid + 1, node_end, target, val);
 
-    seg_tree[node] = seg_tree[2 * node] + seg_tree[2 * node + 1];
+    seg_tree[node] = min(seg_tree[2 * node], seg_tree[2 * node + 1]);
 }
 
 void build_tree(ll &n, vll &arr)
@@ -89,7 +89,7 @@ void build_tree(ll &n, vll &arr)
     forn(i, n)
         seg_tree[m + i] = arr[i];
     rforsn(i, m - 1, 1)
-        seg_tree[i] = seg_tree[2 * i] + seg_tree[2 * i + 1];
+        seg_tree[i] = min(seg_tree[2 * i], seg_tree[2 * i + 1]);
 }
 
 ll query_tree(ll query_start, ll query_end)
