@@ -1,0 +1,105 @@
+#include <bits/stdc++.h>
+#include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
+
+using namespace __gnu_pbds;
+using namespace std;
+
+typedef long long ll;
+typedef long double ld;
+typedef pair<int, int> pii;
+typedef pair<ll, ll> pll;
+typedef pair<double, double> pdd;
+typedef vector<ll> vll;
+typedef vector<int> vi;
+typedef vector<bool> vb;
+typedef vector<vector<int>> vvi;
+typedef vector<vector<ll>> vvll;
+typedef vector<vector<pii>> vvpii;
+typedef vector<vector<bool>> vvb;
+typedef vector<pll> vpll;
+typedef vector<pii> vpii;
+
+ll MOD = 1e9 + 7;
+double eps = 1e-12;
+const int di[] = {1, 0, -1, 0};
+const int dj[] = {0, -1, 0, 1};
+
+#define forn(i, e) for (ll i = 0; i < e; i++)
+#define forsn(i, s, e) for (ll i = s; i < e; i++)
+#define rforn(i, s) for (ll i = s; i >= 0; i--)
+#define rforsn(i, s, e) for (ll i = s; i >= e; i--)
+#define endl '\n'
+#define mp make_pair
+#define pb push_back
+#define pf push_front
+#define fi first
+#define se second
+#define INF 2e9
+#define all(x) (x).begin(), (x).end()
+#define sz(x) ((ll)(x).size())
+#define cut(str, s, e) (string(str.begin() + s, str.end() + e))
+#define pqTopMaior(t) priority_queue<t, vector<t>, less<t>>
+#define pqTopMenor(t) priority_queue<t, vector<t>, greater<t>>
+
+inline ll mod(ll a, ll m) { return ((a % m) + m) % m; }
+
+// See: Order-Statistic Tree
+using oset = tree<pii,       // key type
+                  null_type, // value type
+                  less<pii>, // compare function
+                  rb_tree_tag,
+                  tree_order_statistics_node_update>;
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    ll n;
+    cin >> n;
+
+    set<pair<pii, int>> s;
+    vector<pair<pii, int>> v(n);
+    forn(i, n)
+    {
+        cin >> v[i].first.first >> v[i].first.second;
+        s.insert({v[i].first, (int)i});
+        s.insert({{v[i].first.second, -v[i].first.first}, (int)i});
+    }
+
+    auto ost_in = oset();
+    auto ost_out = oset();
+    vi contains(n);
+    vi contained(n);
+    for (pair<pii, int> entry : s)
+    {
+        pii range = entry.first;
+        int pos = entry.second;
+        if (range.second > 0)
+        {
+            ost_in.insert({range.first, -range.second});
+        }
+        else
+        {
+            pii r = {-range.second, range.first};
+            contained[pos] = ost_in.order_of_key({r.first, -r.second});
+            ost_in.erase({r.first, -r.second});
+            contains[pos] = ost_out.order_of_key({range.second, range.first});
+            ost_out.insert({range.second, range.first});
+        }
+    }
+
+    forn(i, n)
+            cout
+        << contains[i] << " ";
+    cout << endl;
+
+    forn(i, n)
+            cout
+        << contained[i] << " ";
+    cout << endl;
+
+    return 0;
+}
