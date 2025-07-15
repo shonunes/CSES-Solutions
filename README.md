@@ -1,18 +1,18 @@
 # CSES Problem Set Solutions
 
-📌 A collection of my solutions to the [CSES Problem Set](https://cses.fi/problemset/), implemented in C++. This repository is a work in progress and will be updated with more solutions over time.
+A collection of my solutions to the [CSES Problem Set](https://cses.fi/problemset/), implemented in C++. This repository is a work in progress and will be updated with more solutions over time.
 
-## 📖 Table of Contents
+## Table of Contents
 - [Introduction](#-introduction)
 - [Getting Started](#️-getting-started)
 - [Repository Structure](#-repository-structure)
 - [Contributing](#-contributing)
 - [Resources](#-resources)
 
-## 🚀 Introduction
+## Introduction
 The CSES Problem Set is a well-known collection of competitive programming problems that cover various topics such as sorting, dynamic programming, graph algorithms, and more. This repository contains my solutions to these problems, which I am actively working on.
 
-## ⚙️ Getting Started
+## Getting Started
 To use these solutions:
 1. Clone this repository:
   ```sh
@@ -28,7 +28,7 @@ To use these solutions:
   ./problem_name
   ```
 
-## 📂 Repository Structure
+## Repository Structure
 The solutions are organized in a structured manner:
 ```
 📁 CSES-Solutions
@@ -46,8 +46,8 @@ The solutions are organized in a structured manner:
 - Each problem is placed under its corresponding category.
 - The problem names match their official CSES titles.
 
-## 🤝 Contributing
+## Contributing
 Currently, this repository contains my personal solutions, but feel free to open issues for suggestions or discussions. If you find errors or have optimized versions, you can submit a pull request!
 
-## 📚 Resources
+## Resources
 🔗 [CSES Problem Set](https://cses.fi/problemset/)
