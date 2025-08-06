@@ -73,7 +73,7 @@ ll bellman_ford(int source, int n, vvpll &adj, vll &dist)
                 return -1;
         }
     }
-    
+
     return dist[n - 1];
 }
 
