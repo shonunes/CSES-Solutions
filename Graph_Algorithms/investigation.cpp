@@ -87,36 +87,6 @@ void dijkstra(int source, vector<vector<pll>> &adj, vector<ll> &ans)
     ans = {dist[n - 1], route_count[n - 1], min_flights[n - 1], max_flights[n - 1]};
 }
 
-ll min_flights(int node, ll price, vector<vector<pll>> &adj, vector<ll> &dist)
-{
-    if (price == 0)
-        return 0;
-
-    ll flights = INF;
-    for (pll nb : adj[node])
-    {
-        if (dist[nb.first] == price - nb.second)
-            flights = min(flights, min_flights(nb.first, dist[nb.first], adj, dist) + 1);
-    }
-
-    return flights;
-}
-
-ll max_flights(int node, ll price, vector<vector<pll>> &adj, vector<ll> &dist)
-{
-    if (price == 0)
-        return 0;
-
-    ll flights = -INF;
-    for (pll nb : adj[node])
-    {
-        if (dist[nb.first] == price - nb.second)
-            flights = max(flights, max_flights(nb.first, dist[nb.first], adj, dist) + 1);
-    }
-
-    return flights;
-}
-
 int main(void)
 {
     ios_base::sync_with_stdio(false);
