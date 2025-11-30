@@ -1,0 +1,170 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+typedef long long ll;
+typedef long double ld;
+typedef pair<int, int> pii;
+typedef pair<ll, ll> pll;
+typedef pair<double, double> pdd;
+typedef vector<ll> vll;
+typedef vector<int> vi;
+typedef vector<bool> vb;
+typedef vector<vector<int>> vvi;
+typedef vector<vector<ll>> vvll;
+typedef vector<vector<pii>> vvpii;
+typedef vector<vector<bool>> vvb;
+typedef vector<pll> vpll;
+typedef vector<pii> vpii;
+
+ll MOD = 1e9 + 7;
+double eps = 1e-12;
+const int di[] = {1, 0, -1, 0};
+const int dj[] = {0, -1, 0, 1};
+
+#define forn(i, e) for (ll i = 0; i < e; i++)
+#define forsn(i, s, e) for (ll i = s; i < e; i++)
+#define rforn(i, s) for (ll i = s; i >= 0; i--)
+#define rforsn(i, s, e) for (ll i = s; i >= e; i--)
+#define endl '\n'
+#define mp make_pair
+#define pb push_back
+#define pf push_front
+#define fi first
+#define se second
+#define INF 2e9
+#define all(x) (x).begin(), (x).end()
+#define sz(x) ((ll)(x).size())
+#define cut(str, s, e) (string(str.begin() + s, str.end() + e))
+#define pqTopMaior(t) priority_queue<t, vector<t>, less<t>>
+#define pqTopMenor(t) priority_queue<t, vector<t>, greater<t>>
+
+inline ll mod(ll a, ll m) { return ((a % m) + m) % m; }
+
+struct Node
+{
+    ll sum;
+    ll start_arr;
+    ll end_arr;
+    ll max_arr;
+
+    Node(): sum(0), start_arr(0), end_arr(0), max_arr(0) {}
+    Node(ll val)
+        : sum(val),
+          start_arr(max((ll)0, val)),
+          end_arr(max((ll)0, val)),
+          max_arr(max((ll)0, val)) {}
+    Node(ll start_arr, ll end_arr, ll max_arr)
+        : sum(0),
+          start_arr(max((ll)0, start_arr)),
+          end_arr(max((ll)0, end_arr)),
+          max_arr(max((ll)0, max_arr)) {}
+    Node(ll start_arr, ll end_arr, ll max_arr, ll sum)
+        : sum(sum),
+          start_arr(max((ll)0, start_arr)),
+          end_arr(max((ll)0, end_arr)),
+          max_arr(max((ll)0, max_arr)) {}
+    
+    Node operator+(const Node &n)
+    {
+        Node res = Node();
+        res.sum = sum + n.sum;
+        res.start_arr = max(start_arr, sum + n.start_arr);
+        res.end_arr = max(end_arr + n.sum, n.end_arr);
+        res.max_arr = max(max_arr, max(n.max_arr, end_arr + n.start_arr));
+        return res;
+    }
+};
+
+// Nodes start at index 1, index 0 is ignored
+vector<Node> seg_tree;
+
+Node __query_tree(int node, ll node_start, ll node_end, ll query_start, ll query_end)
+{
+    if (node_start >= query_start && node_end <= query_end)
+        return seg_tree[node];
+
+    if (node_start > query_end || node_end < query_start)
+        return 0;
+
+    ll mid = (node_start + node_end) / 2;
+    return __query_tree(2 * node, node_start, mid, query_start, query_end) +
+           __query_tree(2 * node + 1, mid + 1, node_end, query_start, query_end);
+}
+
+void __update_tree(ll node, ll node_start, ll node_end, ll target, ll val)
+{
+    if (node_start == node_end)
+    {
+        seg_tree[node] = Node(val);
+        return;
+    }
+
+    ll mid = (node_start + node_end) / 2;
+    if (target <= mid)
+        __update_tree(2 * node, node_start, mid, target, val);
+    else
+        __update_tree(2 * node + 1, mid + 1, node_end, target, val);
+
+    seg_tree[node] = seg_tree[2 * node] + seg_tree[2 * node + 1];
+}
+
+void build_tree(ll n, vll &arr)
+{
+    // Find next power of 2
+    ll m = n - 1;
+    m |= m >> 1;
+    m |= m >> 2;
+    m |= m >> 4;
+    m |= m >> 8;
+    m |= m >> 16;
+    m |= m >> 32;
+    m++;
+
+    seg_tree.resize(2 * m);
+    forn(i, n)
+    {
+        seg_tree[m + i] = Node(arr[i]);
+    }
+
+    rforsn(i, m - 1, 1)
+    {
+        seg_tree[i] = seg_tree[2 * i] + seg_tree[2 * i + 1];
+    }
+}
+
+ll query_tree(ll query_start, ll query_end)
+{
+    return __query_tree(1, 1, seg_tree.size() / 2, query_start, query_end).max_arr;
+}
+
+void update_tree(ll target, ll val)
+{
+    __update_tree(1, 1, seg_tree.size() / 2, target, val);
+}
+
+int main()
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+
+    ll n, q;
+    cin >> n >> q;
+
+    vll arr(n);
+    forn(i, n)
+    {
+        cin >> arr[i];
+    }
+    build_tree(n, arr);
+
+    forn(i, q)
+    {
+        int a, b;
+        cin >> a >> b;
+        update_tree(a, b);
+        cout << query_tree(1, n) << endl;
+    }
+
+    return 0;
+}
